@@ -1,1 +1,0 @@
-/usr/local/bin/c++      CMakeFiles/server-source.dir/main.cpp.o  -o server-source /usr/lib/x86_64-linux-gnu/libboost_system.so /usr/lib/x86_64-linux-gnu/libboost_filesystem.so -pthread 
