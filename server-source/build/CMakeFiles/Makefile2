@@ -54,10 +54,10 @@ RM = /usr/bin/cmake -E remove -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /usr/src/cppweb/server-source
+CMAKE_SOURCE_DIR = /usr/src/cpp-server/server-source
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /usr/src/cppweb/server-source/build
+CMAKE_BINARY_DIR = /usr/src/cpp-server/server-source/build
 
 #=============================================================================
 # Target rules for target CMakeFiles/server-source.dir
@@ -66,7 +66,7 @@ CMAKE_BINARY_DIR = /usr/src/cppweb/server-source/build
 CMakeFiles/server-source.dir/all:
 	$(MAKE) -f CMakeFiles/server-source.dir/build.make CMakeFiles/server-source.dir/depend
 	$(MAKE) -f CMakeFiles/server-source.dir/build.make CMakeFiles/server-source.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/usr/src/cppweb/server-source/build/CMakeFiles --progress-num=1,2 "Built target server-source"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/usr/src/cpp-server/server-source/build/CMakeFiles --progress-num=1,2 "Built target server-source"
 .PHONY : CMakeFiles/server-source.dir/all
 
 # Include target in all.
@@ -76,9 +76,9 @@ all: CMakeFiles/server-source.dir/all
 
 # Build rule for subdir invocation for target.
 CMakeFiles/server-source.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /usr/src/cppweb/server-source/build/CMakeFiles 2
+	$(CMAKE_COMMAND) -E cmake_progress_start /usr/src/cpp-server/server-source/build/CMakeFiles 2
 	$(MAKE) -f CMakeFiles/Makefile2 CMakeFiles/server-source.dir/all
-	$(CMAKE_COMMAND) -E cmake_progress_start /usr/src/cppweb/server-source/build/CMakeFiles 0
+	$(CMAKE_COMMAND) -E cmake_progress_start /usr/src/cpp-server/server-source/build/CMakeFiles 0
 .PHONY : CMakeFiles/server-source.dir/rule
 
 # Convenience name for target.

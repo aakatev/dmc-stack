@@ -29,11 +29,10 @@
 using namespace std;
 using namespace crow;
 
-const string STATIC = "/usr/src/cppweb/server-source/public/";
+const string PUBLIC_PATH = "/usr/src/cpp-server/server-source/public/";
 
 void sendFile(response &res, string filename, string contentType){
-  cout << filesystem::current_path;
-  ifstream in(STATIC + filename, ifstream::in);
+  ifstream in(PUBLIC_PATH + filename, ifstream::in);
   if(in){
     ostringstream contents;
     contents << in.rdbuf();
@@ -86,8 +85,13 @@ int main(int argc, char* argv[]) {
       sendHtml(res, "index");
     });
 
+  CROW_ROUTE(app, "/about")
+    ([](const request &req, response &res){
+      sendHtml(res, "about");
+    });
+
   char* port = getenv("PORT");
   uint16_t iPort = static_cast<uint16_t>(port != NULL? stoi(port): 18080);
-  cout << "PORT = " << iPort << "\n";
+  cout << "Running on PORT " << iPort << "\n";
   app.port(iPort).multithreaded().run();
 }

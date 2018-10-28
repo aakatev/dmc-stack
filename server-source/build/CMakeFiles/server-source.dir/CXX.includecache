@@ -6,7 +6,7 @@
 
 #IncludeRegexTransform: 
 
-/usr/src/cppweb/server-source/crow_all.h
+/usr/src/cpp-server/server-source/crow_all.h
 stdio.h
 -
 string.h
@@ -214,7 +214,7 @@ type_traits
 thread
 -
 
-/usr/src/cppweb/server-source/main.cpp
+/usr/src/cpp-server/server-source/main.cpp
 crow_all.h
-/usr/src/cppweb/server-source/crow_all.h
+/usr/src/cpp-server/server-source/crow_all.h
 

@@ -1,24 +1,24 @@
 Determining if the pthread_create exist failed with the following output:
-Change Dir: /usr/src/cppweb/server-source/build/CMakeFiles/CMakeTmp
+Change Dir: /usr/src/cpp-server/server-source/build/CMakeFiles/CMakeTmp
 
-Run Build Command:"/usr/bin/make" "cmTC_20fce/fast"
-/usr/bin/make -f CMakeFiles/cmTC_20fce.dir/build.make CMakeFiles/cmTC_20fce.dir/build
-make[1]: Entering directory '/usr/src/cppweb/server-source/build/CMakeFiles/CMakeTmp'
-Building C object CMakeFiles/cmTC_20fce.dir/CheckSymbolExists.c.o
-/usr/bin/cc     -o CMakeFiles/cmTC_20fce.dir/CheckSymbolExists.c.o   -c /usr/src/cppweb/server-source/build/CMakeFiles/CMakeTmp/CheckSymbolExists.c
-Linking C executable cmTC_20fce
-/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_20fce.dir/link.txt --verbose=1
-/usr/bin/cc       CMakeFiles/cmTC_20fce.dir/CheckSymbolExists.c.o  -o cmTC_20fce 
-CMakeFiles/cmTC_20fce.dir/CheckSymbolExists.c.o: In function `main':
+Run Build Command:"/usr/bin/make" "cmTC_6d85e/fast"
+/usr/bin/make -f CMakeFiles/cmTC_6d85e.dir/build.make CMakeFiles/cmTC_6d85e.dir/build
+make[1]: Entering directory '/usr/src/cpp-server/server-source/build/CMakeFiles/CMakeTmp'
+Building C object CMakeFiles/cmTC_6d85e.dir/CheckSymbolExists.c.o
+/usr/bin/cc     -o CMakeFiles/cmTC_6d85e.dir/CheckSymbolExists.c.o   -c /usr/src/cpp-server/server-source/build/CMakeFiles/CMakeTmp/CheckSymbolExists.c
+Linking C executable cmTC_6d85e
+/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_6d85e.dir/link.txt --verbose=1
+/usr/bin/cc       CMakeFiles/cmTC_6d85e.dir/CheckSymbolExists.c.o  -o cmTC_6d85e 
+CMakeFiles/cmTC_6d85e.dir/CheckSymbolExists.c.o: In function `main':
 CheckSymbolExists.c:(.text+0x16): undefined reference to `pthread_create'
 collect2: error: ld returned 1 exit status
-CMakeFiles/cmTC_20fce.dir/build.make:97: recipe for target 'cmTC_20fce' failed
-make[1]: *** [cmTC_20fce] Error 1
-make[1]: Leaving directory '/usr/src/cppweb/server-source/build/CMakeFiles/CMakeTmp'
-Makefile:126: recipe for target 'cmTC_20fce/fast' failed
-make: *** [cmTC_20fce/fast] Error 2
+CMakeFiles/cmTC_6d85e.dir/build.make:97: recipe for target 'cmTC_6d85e' failed
+make[1]: *** [cmTC_6d85e] Error 1
+make[1]: Leaving directory '/usr/src/cpp-server/server-source/build/CMakeFiles/CMakeTmp'
+Makefile:126: recipe for target 'cmTC_6d85e/fast' failed
+make: *** [cmTC_6d85e/fast] Error 2
 
-File /usr/src/cppweb/server-source/build/CMakeFiles/CMakeTmp/CheckSymbolExists.c:
+File /usr/src/cpp-server/server-source/build/CMakeFiles/CMakeTmp/CheckSymbolExists.c:
 /* */
 #include <pthread.h>
 
