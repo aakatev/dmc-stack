@@ -1,0 +1,3 @@
+/usr/src/cppweb/server-source/build/CMakeFiles/rebuild_cache.dir
+/usr/src/cppweb/server-source/build/CMakeFiles/server-source.dir
+/usr/src/cppweb/server-source/build/CMakeFiles/edit_cache.dir
