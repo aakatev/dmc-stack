@@ -6,8 +6,9 @@ set(CMAKE_CXX_STANDARD 11)
 set(THREADS_PREFER_PTHREAD_FLAG ON)
 
 find_package(Boost COMPONENTS system filesystem REQUIRED)
-find_package(Threads)
+find_package(Threads REQUIRED)
+find_package(libmongocxx REQUIRED)
 
-include_directories(${Boost_INCLUDE_DIRS})
 add_executable(server-source main.cpp)
-target_link_libraries(server-source ${Boost_LIBRARIES} Threads::Threads)
+target_include_directories(server-source PRIVATE ${Boost_INCLUDE_DIRS} ${LIBMONGOCXX_INCLUDE_DIRS})
+target_link_libraries(server-source ${Boost_LIBRARIES} Threads::Threads ${LIBMONGOCXX_LIBRARIES})

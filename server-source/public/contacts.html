@@ -1,0 +1,36 @@
+<html>
+<head>
+ <meta name="viewport" content="width=device-width, initial-scale=1.0">
+ <title>Contacts</title>
+ </head>
+ <body>
+  <div class="container">
+    <h2>Contacts:</h2>
+    <table>
+      <thead>
+        <tr>
+          <th>FN</th>
+          <th>LN</th>
+          <th>email</th>
+          <th>cell</th>
+        </tr>
+      </thead>
+      <thbody>
+        {{#contacts}}
+        <tr>
+          <th>{{firstName}}</th>
+          <th>{{lastName}}</th>
+          <th>{{email}}</th>
+          <th>{{phone}}</th>
+        </tr>
+        {{/contacts}}
+      </thbody>
+    </table>
+  </div>
+</body>
+</html>
+<!-- Error loading this URI: Could not load the source for http://localhost:8080/contacts.
+[Exception... "Component returned failure code: 0x80470002 (NS_BASE_STREAM_CLOSED) [nsIInputStream.available]"  nsresult: "0x80470002 (NS_BASE_STREAM_CLOSED)"  location: "JS frame :: resource://devtools/shared/base-loader.js -> resource://devtools/shared/DevToolsUtils.js :: onResponse :: line 568"  data: no]
+Stack: onResponse@resource://devtools/shared/base-loader.js -> resource://devtools/shared/DevToolsUtils.js:568:25
+onStopRequest@resource://gre/modules/NetUtil.jsm:126:17
+Line: 568, column: 0 -->
