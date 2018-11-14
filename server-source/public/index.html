@@ -3,27 +3,22 @@
  <meta name="viewport" content="width=device-width, initial-scale=1.0">
  <title>CPP Server</title>
  <link href="https://fonts.googleapis.com/css?family=Condiment|Alegreya+SC" rel="stylesheet"> 
- <link rel="stylesheet" href="styles/styles.css">
+ <link rel="stylesheet" href="styles/index.css">
 </head>
 <body>
- <div class="container-main">
-   <div class="header">
-     <a onclick="show_hide_navbar()" id="nav-logo">C++Server</a>
-     <div class="navbar">
-       <a class="btn btn-shop" style="text-decoration: none; color: black;" href="/contacts">Contacts</a>
-     </div>
-   </div>
-   <div class="content-main">
-      <h1>Hey, CPP Server!</h1>
-      <p>Webserver serving this page build with C++ microframework Crow. It uses other C++ libraries: boost, bsoncxx, and mongocxx.</p>
-      <p>It supports MongoDB, and Crow framework have its own implementation of Mustache, allowing for backend rendering.</p>
-      <p>Easy to setup, develop, and deploy with Docker! Learn more on projects GitHub repo.</p>
-      <br/>         
-      <h2>Documentation</h2>
-      <p>Comming soon! For now, you can check an example of MongoDB query by visiting contacts tab.</p>
+  <header class="showcase">
+    <div class="content">
+      <div class="bird-container"><div class="bird" style="background-image: url(./svgs/bird-cells.svg);"></div></div>
+      <div class="title">
+        D<a class="big-logo">ockerized </a>C<a class="big-logo">row<a/>
+      </div>
+      <div class="text">
+        Fast and easy solution for your webb app
+      </div>
+      <a href="/project">Learn More</a>
     </div>
-  </div>
-  <div class="footer"><a style="text-decoration: none; color: black;" href="https://github.com/aakatev">Follow me on GitHub!</a></div>
-  <script src="scripts/script.js"></script>
+  </header>
+  <!-- <div class="footer"><a style="text-decoration: none; color: black;" href="https://github.com/aakatev">Follow me on GitHub!</a></div> -->
+  <!-- <script src="scripts/script.js"></script> -->
 </body>
 </html>

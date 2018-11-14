@@ -14,6 +14,9 @@
 #include<mongocxx/uri.hpp>
 #include<mongocxx/instance.hpp>
 
+#include "loaders.cpp"
+#include "routes.cpp"
+
 using bsoncxx::builder::stream::close_array;
 using bsoncxx::builder::stream::close_document;
 using bsoncxx::builder::stream::document;
@@ -24,122 +27,200 @@ using bsoncxx::builder::basic::kvp;
 using bsoncxx::builder::basic::make_document;
 using mongocxx::cursor;
 
-using namespace std;
-using namespace crow;
-using namespace crow::mustache;
+const std::string MONGO_URI = "mongodb://admin:password1@ds151753.mlab.com:51753/mongo-cpp-server";
 
-const string PUBLIC_PATH = "/usr/src/cpp-server/server-source/public/";
-const string MONGO_URI = "mongodb://admin:password1@ds151753.mlab.com:51753/mongo-cpp-server";
-
-
-void getView(response &res, const string &filename, context &x) {
-  res.set_header("Content-Type", "text/html");
-
-  auto text = load(filename + ".html").render(x);
-  res.write(text);
-
-  res.end();
-}
-
-void sendFile(response &res, const string &filename, string contentType){
-  ifstream in(PUBLIC_PATH + filename, ifstream::in);
-  if(in){
-    ostringstream contents;
-    contents << in.rdbuf();
-    in.close();
-    res.set_header("Content-Type", contentType);
-    res.write(contents.str());
-  } else {
-    res.code = 404;
-    res.write("Not found");
-  }
-  res.end();
-}
-
-void sendHtml(response &res, string filename){
-  sendFile(res, filename + ".html", "text/html");
-}
-
-void sendImage(response &res, string filename){
-  sendFile(res, "imgs/" + filename, "image/jpeg");
-}
-
-void sendScript(response &res, string filename){
-  sendFile(res, "scripts/" + filename, "text/javascript");
-}
-
-void sendStyle(response &res, string filename){
-  sendFile(res, "styles/" + filename, "text/css");
-}
 
 int main(int argc, char* argv[]) {
   // Crow config
   crow::SimpleApp app;
   // Mustache config 
-  set_base("/usr/src/cpp-server/server-source/public/");
+  crow::mustache::set_base("/usr/src/cpp-server/server-source/public/");
   // MongoDB config
   mongocxx::instance inst{};
   mongocxx::client conn{mongocxx::uri{MONGO_URI}};
   auto collection = conn["mongo-cpp-server"]["contacts"];
+  auto collection2 = conn["mongo-cpp-server"]["history"];
 
-  // Routes
-  CROW_ROUTE(app, "/styles/<string>")
-  ([](const request &req, response &res, string filename){
-    sendStyle(res, filename);
+  // Essential Routes
+  // e.g. html, css, js, etc 
+  loadEssentialRoutes(app);
+
+  // Other routes
+  CROW_ROUTE(app, "/add_json")
+  .methods("POST"_method)
+  ([&collection](const crow::request& req){
+    auto x = crow::json::load(req.body);
+    if (!x)
+      return crow::response(400);
+    // int sum = x["a"].i()+x["b"].i();
+    std::ostringstream os;
+    os << x;
+
+    collection.insert_one(bsoncxx::from_json(os.str()));
+
+    return crow::response{os.str()+"\n"};
   });
 
-  CROW_ROUTE(app, "/scripts/<string>")
-  ([](const request &req, response &res, string filename){
-    sendScript(res, filename);
+  CROW_ROUTE(app, "/add_post")
+  ([](const crow::request &req, crow::response &res){
+    res.set_header("Content-Type", "text/plain");
+    res.set_header("Access-Control-Allow-Origin", "*");
+    res.set_header("Access-Control-Allow-Methods", "GET, POST, OPTIONS, PUT, PATCH, DELETE");
+    res.set_header("Access-Control-Allow-Headers", "X-Requested-With,content-type");
+    res.set_header("Access-Control-Allow-Credentials", "true");
+    sendHtml(res, "add_post");
   });
 
-  CROW_ROUTE(app, "/imgs/<string>")
-  ([](const request &req, response &res, string filename){
-    sendImage(res, filename);
-  });
 
   CROW_ROUTE(app, "/contact/<string>")
-  ([&collection](const request &req, response &res, string id){
+  ([&collection](const crow::request &req, crow::response &res, std::string id){
     auto doc = collection.find_one(make_document(kvp("id", id)));
+
+    if(!doc) {
+      return notFound(res, "Contact");
+    }
+
     crow::json::wvalue dto;
 
-    dto["contact"] = json::load(bsoncxx::to_json(doc.value().view()));
+    dto["contact"] = crow::json::load(bsoncxx::to_json(doc.value().view()));
 
     getView(res, "contact", dto);
   });
 
   CROW_ROUTE(app, "/contacts")
-  ([&collection](const request &req, response &res){
+  ([&collection](const crow::request &req, crow::response &res){
     mongocxx::options::find opts;
     opts.limit(10);
 
     auto docs = collection.find({}, opts);
+
     crow::json::wvalue dto;
-    vector<crow::json::rvalue> contacts;
+    std::vector<crow::json::rvalue> contacts;
     contacts.reserve(10);
 
     for(auto doc : docs) {
-      contacts.push_back(json::load(bsoncxx::to_json(doc)));
+      contacts.push_back(crow::json::load(bsoncxx::to_json(doc)));
     }
     dto["contacts"] = contacts;
 
     getView(res, "contacts", dto);
   });
 
+  CROW_ROUTE(app, "/api/contacts")
+  ([&collection](const crow::request &req){
+    mongocxx::options::find opts;
+    opts.limit(10);
 
-  CROW_ROUTE(app, "/")
-  ([](const request &req, response &res){
+    auto docs = collection.find({}, opts);
+    std::vector<crow::json::rvalue> contacts;
+    contacts.reserve(10);
+
+    for(auto doc : docs) {
+      contacts.push_back(crow::json::load(bsoncxx::to_json(doc)));
+    }
+
+    crow::json::wvalue dto;
+    dto["contacts"] = contacts;
+
+    crow::response res{dto};
+    res.set_header("Access-Control-Allow-Origin", "*");
+    res.set_header("Access-Control-Allow-Methods", "GET, POST, OPTIONS, PUT, PATCH, DELETE");
+    res.set_header("Access-Control-Allow-Headers", "X-Requested-With,content-type");
+    res.set_header("Access-Control-Allow-Credentials", "true");
+    return res;
+  });
+
+  CROW_ROUTE(app, "/api/nba")
+  ([&collection2](const crow::request &req){
+    mongocxx::options::find opts;
+    opts.limit(1);
+
+    auto docs = collection2.find({}, opts);
+    std::vector<crow::json::rvalue> contacts;
+    contacts.reserve(1);
+
+    for(auto doc : docs) {
+      contacts.push_back(crow::json::load(bsoncxx::to_json(doc)));
+    }
+
+    crow::json::wvalue dto;
+    dto["contacts"] = contacts;
+
+    crow::response res{dto};
+    res.set_header("Content-Type", "text/plain");
+    res.set_header("Access-Control-Allow-Origin", "*");
+    res.set_header("Access-Control-Allow-Methods", "GET, POST, OPTIONS, PUT, PATCH, DELETE");
+    res.set_header("Access-Control-Allow-Headers", "X-Requested-With,content-type");
+    res.set_header("Access-Control-Allow-Credentials", "true");
+    return res;
+  });
+
+  CROW_ROUTE(app, "/api").methods(crow::HTTPMethod::Post, crow::HTTPMethod::Get, crow::HTTPMethod::Put)
+  ([](const crow::request &req, crow::response &res){
+    std::string method = method_name(req.method);
+    res.set_header("Content-Type", "text/plain");
+    res.set_header("Access-Control-Allow-Origin", "*");
+    res.set_header("Access-Control-Allow-Methods", "GET, POST, OPTIONS, PUT, PATCH, DELETE");
+    res.set_header("Access-Control-Allow-Headers", "X-Requested-With,content-type");
+    res.set_header("Access-Control-Allow-Credentials", "true");
+    res.write(method + "api");
+    res.end();
+  });
+
+  CROW_ROUTE(app, "/react")
+  ([&collection](const crow::request &req, crow::response &res){
+    mongocxx::options::find opts;
+    opts.limit(10);
+
+    auto docs = collection.find({}, opts);
+    crow::json::wvalue dto;
+    std::vector<crow::json::rvalue> contacts;
+    contacts.reserve(10);
+
+    for(auto doc : docs) {
+      contacts.push_back(crow::json::load(bsoncxx::to_json(doc)));
+    }
+    dto["contacts"] = contacts;
+
+    getView(res, "react", dto);
+  });
+
+  CROW_ROUTE(app, "/contacts/<string>")
+  ([&collection](const crow::request &req, crow::response &res, std::string page){
+    mongocxx::options::find opts;
+    opts.skip(stoi(page)*10);
+    opts.limit(10);
+
+    auto docs = collection.find({}, opts);
+    crow::json::wvalue dto;
+    std::vector<crow::json::rvalue> contacts;
+    contacts.reserve(10);
+
+    for(auto doc : docs) {
+      contacts.push_back(crow::json::load(bsoncxx::to_json(doc)));
+    }
+    dto["contacts"] = contacts;
+
+    getView(res, "contacts", dto);
+  });
+
+  CROW_ROUTE(app, "/").methods(crow::HTTPMethod::Post, crow::HTTPMethod::Get, crow::HTTPMethod::Put)
+  ([](const crow::request &req, crow::response &res){
+    res.set_header("Access-Control-Allow-Origin", "*");
+    res.set_header("Access-Control-Allow-Methods", "GET, POST, OPTIONS, PUT, PATCH, DELETE");
+    res.set_header("Access-Control-Allow-Headers", "X-Requested-With,content-type");
+    res.set_header("Access-Control-Allow-Credentials", "true");
     sendHtml(res, "index");
   });
 
-  CROW_ROUTE(app, "/about")
-  ([](const request &req, response &res){
-    sendHtml(res, "about");
+  CROW_ROUTE(app, "/project")
+  ([](const crow::request &req, crow::response &res){
+    sendHtml(res, "project");
   });
 
   // Output running port
   char* port = getenv("PORT");
-  uint16_t iPort = static_cast<uint16_t>(port != NULL? stoi(port): 18080);
-  cout << "Running on PORT " << iPort << "\n";
+  uint16_t iPort = static_cast<uint16_t>(port != NULL? std::stoi(port): 18080);
+  std::cout << "Running on PORT " << iPort << "\n";
   app.port(iPort).multithreaded().run();
 }

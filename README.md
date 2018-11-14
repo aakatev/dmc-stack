@@ -79,3 +79,27 @@ $ cd /usr/src/cpp-server/server-source/build && cmake .. && make
 #### Running development server
 
 After you created container, mounted volume, and successfully compiled server code, you can launch Crow server from inside of the <code>playbox</code> container. The server is running at <code>localhost:8080</code>
+
+
+Docs v2
+
+
+Docker (from cpp-server folder):
+```
+docker run -v $PWD:/usr/src/cpp-server -p 8080:8080 -e PORT=8080 -ti playbox:latest bash
+```
+
+Heroku (from server-source folder):
+```
+heroku login
+```
+```
+heroku container:login
+```
+```
+heroku container:push web -a cpp-crow-server
+```
+```
+heroku container:release web -a cpp-crow-server
+```
+
