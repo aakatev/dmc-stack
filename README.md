@@ -16,6 +16,8 @@ Example of a website using C++ server, and WebAssembly modules
 * WebAssembly modules on frontend
 * Docker
 * CMake
+* MongoDB
+* C++ libraries: boost/mongocxx/bsoncxx
 
 
 ### Getting Started
@@ -80,9 +82,7 @@ $ cd /usr/src/cpp-server/server-source/build && cmake .. && make
 
 After you created container, mounted volume, and successfully compiled server code, you can launch Crow server from inside of the <code>playbox</code> container. The server is running at <code>localhost:8080</code>
 
-
-Docs v2
-
+## Docs v2
 
 Docker (from cpp-server folder):
 ```
