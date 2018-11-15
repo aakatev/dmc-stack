@@ -2,9 +2,9 @@
 
 **Structure (Important files):**
 * <code>playbox/</code> - Docker image with compiler and dependencies
-* <code>server-source/..</code>
+* <code>server-source/..</code> - Most important directory contan
   * <code>public/</code> - html, css, js, wasm
-  * <code>build/server-source</code> - compiled server code
+  * <code>build/server-source</code> - build folder <strong>Important! Folder must be created every time you clone the project!</strong>
   * <code>main.cpp</code> - server code
   * <code>crow_all.h</code> - Crow, C++ web microframework inspired by Flask 
 
@@ -18,6 +18,36 @@ Extension to C++ microframework Crow
 * Docker
 * CMake
 
+
+### Important
+
+Note: The following software was tested on various Ubuntu and Debian distributions of Linux, and some of them require to run docker commands as <code>sudo</code>. No guarantees in Win or Mac workability! 
+
+Requirments: cmake, gcc, docker, mlab account
+
+Prerequisites: Knowledge of basic back end development, prior experience with docker is recommended
+
+Best way to get docker is docker's official [site](https://docs.docker.com/install/)
+
+Easiest way to get g++ on Ubuntu or Debian (most of the time) is the following command
+
+```
+sudo apt-get install build-essential
+```
+
+One way to get cmake is cmake's official [site](https://cmake.org/download/)
+
+
+#### Before we start
+
+You need to create account at mlabs, and following their official [documentation](https://docs.mlab.com/) create new database. This is the only setup guaranteed to work out of the box.
+
+<strong>The next step is important!</strong> In server-source folder create file keys.js that looks the following way:
+
+```
+$ cat keys.h
+static const std::string MONGO_URI = "mongodb://<YOUR_DB_LOGIN>:<YOUR_DB_PASSWORD>@ds131777.mlab.com:754993<YOUR_DB_NAME>";
+```
 
 ### Getting Started
 
@@ -46,7 +76,10 @@ $ docker run -v /home/aakatev/Documents/git/cpp-server:/usr/src/cpp-server -ti p
 - Running Crow server from <code>playbox</code> container with mounted volume, and port 8080 exposed
 
 ```
-$ docker run -v /home/aakatev/Documents/git/cpp-server:/usr/src/cpp-server -p 8080:8080 -e PORT=8080 -ti playbox:latest /usr/src/cpp-server/server-source/build/server-source
+$ docker run -v /home/aakatev/Documents/git/cpp-server:/usr/src/cpp-server \
+-p 8080:8080 -e PORT=8080\
+-ti playbox:latest\
+/usr/src/cpp-server/server-source/build/server-source
 ```
 
 #### C Compiler Cheat Sheet
@@ -72,16 +105,19 @@ The following output indicates successfull compilation.
 - (Shortcut) You can also do it in one line
 
 ```
-$ cd /usr/src/cpp-server/server-source/build && cmake .. && make
+$ mkdir /usr/src/cpp-server/server-source/build
+cd /usr/src/cpp-server/server-source/build &&\
+cmake .. &&\ 
+make
 ```
 
 
 
 #### Running development server
 
-After you created container, mounted volume, and successfully compiled server code, you can launch Crow server from inside of the <code>playbox</code> container. The server is running at <code>localhost:8080</code>
+After you created container, mounted volume, and successfully compiled server code, you can launch Crow server from <code>playbox</code> container. The server is running at <code>localhost:8080</code>
 
-## Docs v2
+## Docs v0.0.2
 
 Docker (from cpp-server folder):
 ```
