@@ -1,4 +1,5 @@
 #include "crow_all.h"
+#include "keys.h"
 #include <fstream>
 #include <iostream>
 #include<vector>
@@ -26,8 +27,6 @@ using bsoncxx::builder::stream::open_document;
 using bsoncxx::builder::basic::kvp;
 using bsoncxx::builder::basic::make_document;
 using mongocxx::cursor;
-
-const std::string MONGO_URI = "mongodb://admin:password1@ds151753.mlab.com:51753/mongo-cpp-server";
 
 
 int main(int argc, char* argv[]) {

@@ -1,0 +1,1 @@
+static const std::string MONGO_URI = "mongodb://admin:password1@ds151753.mlab.com:51753/mongo-cpp-server";
