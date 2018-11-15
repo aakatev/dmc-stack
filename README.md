@@ -8,16 +8,15 @@
   * <code>main.cpp</code> - server code
   * <code>crow_all.h</code> - Crow, C++ web microframework inspired by Flask 
 
-Example of a website using C++ server, and WebAssembly modules
+Extension to C++ microframework Crow
 
 **Build with:**
 
-* [Crow](https://github.com/ipkn/crow) on backend
-* WebAssembly modules on frontend
+* [Crow](https://github.com/ipkn/crow)
+* C++ libraries: boost/mongocxx/bsoncxx
+* MongoDB
 * Docker
 * CMake
-* MongoDB
-* C++ libraries: boost/mongocxx/bsoncxx
 
 
 ### Getting Started
