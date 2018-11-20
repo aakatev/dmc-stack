@@ -1,6 +1,6 @@
 # dmc-stack
 
-Web Stack for C programmers
+Web Stack for C and C++ developers
 
 
 **Include:**
