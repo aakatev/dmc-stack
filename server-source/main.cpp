@@ -219,7 +219,7 @@ int main(int argc, char* argv[]) {
 
   // Output running port
   char* port = getenv("PORT");
-  uint16_t iPort = static_cast<uint16_t>(port != NULL? std::stoi(port): 18080);
+  uint16_t iPort = static_cast<uint16_t>(port != NULL? std::stoi(port): 8080);
   std::cout << "Running on PORT " << iPort << "\n";
   app.port(iPort).multithreaded().run();
 }
