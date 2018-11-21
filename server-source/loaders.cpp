@@ -1,4 +1,4 @@
-const std::string PUBLIC_PATH = "/usr/src/cpp-server/server-source/public/";
+const std::string PUBLIC_PATH = "/usr/src/dmc-stack/server-source/public/";
 
 void getView(crow::response &res, const std::string &filename, crow::mustache::context &x) {
   res.set_header("Content-Type", "text/html");

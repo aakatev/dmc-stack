@@ -33,7 +33,7 @@ int main(int argc, char* argv[]) {
   // Crow config
   crow::SimpleApp app;
   // Mustache config 
-  crow::mustache::set_base("/usr/src/cpp-server/server-source/public/");
+  crow::mustache::set_base("/usr/src/dmc-stack/server-source/public/");
   // MongoDB config
   mongocxx::instance inst{};
   mongocxx::client conn{mongocxx::uri{MONGO_URI}};
