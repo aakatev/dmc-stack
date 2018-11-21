@@ -1,5 +1,3 @@
-#include "crow_all.h"
-#include "keys.h"
 #include <fstream>
 #include <iostream>
 #include<vector>
@@ -15,6 +13,8 @@
 #include<mongocxx/uri.hpp>
 #include<mongocxx/instance.hpp>
 
+#include "crow_all.h"
+#include "config.h"
 #include "loaders.cpp"
 #include "routes.cpp"
 
@@ -33,7 +33,7 @@ int main(int argc, char* argv[]) {
   // Crow config
   crow::SimpleApp app;
   // Mustache config 
-  crow::mustache::set_base("/usr/src/dmc-stack/server-source/public/");
+  crow::mustache::set_base(PUBLIC_PATH);
   // MongoDB config
   mongocxx::instance inst{};
   mongocxx::client conn{mongocxx::uri{MONGO_URI}};
