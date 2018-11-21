@@ -31,7 +31,9 @@ sudo apt-get install build-essential
 One way to get cmake is cmake's official [site](https://cmake.org/download/)
 
 
-### Docs (beta 0.0.0)
+### Docs (beta 0.0.1)
+
+#### Getting Started
 
 1 Make sure you have all the requirments satisfied prior to continue
 
@@ -54,3 +56,20 @@ docker-compose up
 ```
 
 This will run Crow on port <code>8080</code>, and Mongo on <code>27017</code>
+
+
+#### Common issues
+
+Error: <code>docker-compose up</code> generates the following error:
+
+```
+Starting mongo ... error
+
+ERROR: for mongo  Cannot start service mongo: driver failed programming external connectivity on endpoint mongo (ff8a6f574a0991ee95e34c9d460f0f76b8e78341ccb803fca375b8014a188c47): Error starting userland proxy: listen tcp 0.0.0.0:27017: bind: address already in use
+```
+
+Solution: Mongo is already running on port 27017, and you simply need to stop it
+
+```
+sudo service mongodb stop
+```

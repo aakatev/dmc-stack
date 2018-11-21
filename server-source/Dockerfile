@@ -1,9 +1,9 @@
 FROM playbox:latest
 
-WORKDIR /usr/src/cpp-server/server-source/
+WORKDIR /usr/src/dmc-stack/server-source/
 COPY . .
 
-WORKDIR /usr/src/cpp-server/server-source/build
+WORKDIR /usr/src/dmc-stack/server-source/build
 RUN cmake ..
 RUN make 
 
