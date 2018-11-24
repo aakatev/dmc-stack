@@ -1,3 +1,4 @@
+// Hide/unhide menu
 let i = 0;
 nav_status = ['grid','none'];
 show_hide_navbar = () => {

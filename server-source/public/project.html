@@ -1,36 +1,30 @@
 <html>
-<head>
- <meta name="viewport" content="width=device-width, initial-scale=1.0">
- <meta http-equiv="content-type" content="text/html; charset=utf-8" />
- <title>CPP Server</title>
- <link href="https://fonts.googleapis.com/css?family=Condiment|Alegreya+SC" rel="stylesheet"> 
- <link rel="stylesheet" href="styles/project.css">
-</head>
-<body>
- <div class="container-main">
-   <div class="header">
-     <a onclick="show_hide_navbar()" id="nav-logo">C++Server</a>
-     <div class="navbar">
-       <!-- <a class="btn btn-project" style="text-decoration: none; color: black;" href="/contacts">Project</a> -->
-       <a class="btn btn-shop" style="text-decoration: none; color: black;" href="/contacts">Tutorial</a>
-       <a class="btn btn-shop" style="text-decoration: none; color: black;" href="/contacts">Project</a>
-       <a class="btn btn-shop" style="text-decoration: none; color: black;" href="/contacts">Contacts</a>
+  <head>
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+   <title>DMC Stack</title>
+   <link href="https://fonts.googleapis.com/css?family=Condiment|Alegreya+SC" rel="stylesheet"> 
+   <link rel="stylesheet" href="styles/project.css">
+  </head>
+  <body>
+   <div class="container-main">
+     <div class="header">
+       <a onclick="show_hide_navbar()" id="nav-logo">DMC Stack</a>
+       <div class="navbar">
+         <a class="btn btn-shop" style="text-decoration: none; color: black;" href="/contacts">Example</a>
+       </div>
      </div>
-   </div>
-   <div class="content-main">
-      <h1>Hey, CPP Server!</h1>
-      <p>Webserver serving this page build with C++ microframework Crow. It uses other C++ libraries: boost, bsoncxx, and mongocxx.</p>
-      <p>It supports MongoDB, and Crow framework have its own implementation of Mustache, allowing for backend rendering.</p>
-      <p>Easy to setup, develop, and deploy with Docker! Learn more on projects GitHub repo.</p>
-      <br/>         
-      <h2>Documentation</h2>
-      <p>Comming soon! For now, you can check an example of MongoDB query by visiting contacts tab.</p>
-      <p>Also, you can Fetch dummy JSON from our API</p>
-      <h3>Example</h3>
-      <p><code>fetch('https://cpp-crow-server.herokuapp.com/api/contacts').then(res => res.json()).then(json => console.log(json.contacts));</code></p>
+     <div class="content-main">
+        <h1>Hi there,</h1>
+        <p>and welcome to DMC stack, great solution for C and C++ developers seeking back-end solutions!</p>
+        <p>DMC stack consists of Docker, Mongo, and Crow. Docker and Mongo are known to everyone, but what is Crow? It's C++ micro-framework, inspired by Flask. Although community support might not be that great, Crow allows you to do most part of development in C++. It also comes with its own implementation of Mustache, allowing for backend rendering. It supports websockets, and could be a great RESTful API for your client!</p>
+        <p>DMC stack is easy to setup! Learn more on projects GitHub <a href="https://github.com/aakatev/dmc-stack">repo</a>, or official <a href="https://cpp-crow-server.herokuapp.com">website</a>.</p>
+        <br/>         
+        <h2>Documentation</h2>
+        <p>Comming soon! For now, you can check examples on GitHub. If you need help with Docker, their official website is the best source of information. Mongo has great official documentation for their mongoc/mongocxx druver. Finally, Crow repository could be found <a href="https://github.com/ipkn/crow">here</a>, on GitHub.</p>
+      </div>
     </div>
-  </div>
-  <div class="footer"><a style="text-decoration: none; color: black;" href="https://github.com/aakatev">Follow me on GitHub!</a></div>
-  <script src="scripts/project.js"></script>
-</body>
+    <div class="footer"><a style="text-decoration: none; color: black;" href="https://github.com/aakatev">Follow me on GitHub!</a></div>
+    <script src="scripts/project.js"></script>
+  </body>
 </html>

@@ -1,6 +1,15 @@
 # dmc-stack
 
-Web Stack for C and C++ developers
+Web Stack for C and C++ developers. Whether you are looking for full-stack solution, or simply RESTful API, dmc-stack can handle it all.
+
+
+**Features**
+
+* Containerized full-stack build
+* C++ back-end
+* Non-sql db
+* Websocket support
+* [Easy](https://github.com/aakatev/docker-monit-config) to monitor with Prometheus 
 
 
 **Include:**
@@ -12,9 +21,12 @@ Web Stack for C and C++ developers
 
 ### Important
 
-Note: (1) The following software is distributed for educational purposes only, and by no means is ready for production!
+*Note:* 
 
-Note: (2) The following software was tested on various Debian-based distributions of Linux(incl. Ubuntu), and some of them require to run docker commands as <code>sudo</code>. No guarantees in Win or Mac workability! 
+(1) The following software is distributed for educational purposes only, and by no means is ready for production!
+
+(2) The following software was tested on various Debian-based distributions of Linux(incl. Ubuntu), and some of them require to run docker commands as <code>sudo</code>. No guarantees in Win or Mac workability! 
+
 
 Requirments: cmake, gcc, docker ce
 
@@ -68,7 +80,7 @@ Starting mongo ... error
 ERROR: for mongo  Cannot start service mongo: driver failed programming external connectivity on endpoint mongo (ff8a6f574a0991ee95e34c9d460f0f76b8e78341ccb803fca375b8014a188c47): Error starting userland proxy: listen tcp 0.0.0.0:27017: bind: address already in use
 ```
 
-Solution: Mongo is already running on port 27017, and you simply need to stop it
+Solution: For some reason, mongo is up and you simply need to stop it. <code>docker-compose.yml</code> is setup to always restart whenever needed, so this error is almost guaranteed if you decide to manually comopose container.
 
 ```
 sudo service mongodb stop
