@@ -1,6 +1,6 @@
 # dmc-stack
 
-Web Stack for C and C++ developers. Whether you are looking for full-stack solution, or simply RESTful API, dmc-stack can handle it all.
+Web Stack for C and C++ developers. Whether you are looking for a full-stack solution, or simply RESTful API, dmc-stack has an ability handle it all.
 
 
 **Features**
