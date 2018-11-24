@@ -64,7 +64,7 @@ docker-compose up
 **OR** if you need to rebuild image after initial build
 
 ```
-docker-compose up 
+docker-compose up --build
 ```
 
 This will run Crow on port <code>8080</code>, and Mongo on <code>27017</code>
